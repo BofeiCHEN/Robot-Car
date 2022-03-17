@@ -33,8 +33,8 @@ void forward(){//forward function
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
   //The left forward
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
 
   Serial.println("Forward");
 }
@@ -46,8 +46,8 @@ void back() {//back function
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   //The left back
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
   Serial.println("Back");
 }
 
@@ -84,13 +84,12 @@ void stop() {//stop function
 }
 
 
-
 float GetDistance()
 {
     float distance;
     // Send a low short pulse to Trig to trigger the ranging
 	digitalWrite(Trig, LOW); //Send a low level to Trig
-	delayMicroseconds(2); 
+	delayMicroseconds(2);
 	digitalWrite(Trig, HIGH); 
 	delayMicroseconds(10);
 	digitalWrite(Trig, LOW);
@@ -117,14 +116,15 @@ void setup() {
 
   stop();
   ultrasonicServo.write(100);  //setservo position according to scaled value
-    delay(100);
+  delay(100);
 }
 
 void loop() 
 {
+    
     SensorLeft  =  digitalRead(A5);//The sensor on the left
     SensorRight =  digitalRead(A2);//The sensor on the Right
-    
+ 
     middleDistance = GetDistance();//getDistance();
     
     if(middleDistance <= 18) 
@@ -161,15 +161,16 @@ void loop()
             delay(300);
         }
         
-        else 
-        {
-            forward();
-        }
+        // else 
+        // {
+        //     forward();
+        // }
     }
     else 
     {
         forward();
     }
+
     if(!SensorLeft)
     {
       right(); 
