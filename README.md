@@ -1,5 +1,5 @@
 # Robot-Car
-Robot Car project. This resposity is for the Robot Car project.
+This resposity is for the Robot Car project.
 
 ## Component
 ![component](images/component.png)
