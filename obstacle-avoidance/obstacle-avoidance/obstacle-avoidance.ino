@@ -87,6 +87,35 @@ void stop() {//stop function
   Serial.println("Stop!");
 }
 
+/*Function to move car continus in one direction(dir) in one time duration(duration)
+  f:forward
+  b:back
+  l:left
+  r:right
+*/
+void moveOn(char dir, int duration) {
+  unsigned long currentMillis = millis();
+  while (millis() - currentMillis < duration)
+  {
+    switch (dir)
+    {
+    case 'f':
+      forward();
+      break;
+    case 'b':
+      back();
+      break;
+    case 'l':
+      left();
+      break;
+    case 'r':
+      right();
+      break;
+    default:
+      break;
+    }
+  }
+}
 
 float GetDistance()
 {
@@ -152,16 +181,16 @@ void loop()
      
         if(rightDistance > leftDistance) 
         {
-            back();
+            moveOn('b', 1000);
             delay(300);
-            right(); 
+            moveOn('r', 1000); 
             delay(300);
         }
         else if(rightDistance < leftDistance) 
         {
-            back();
+            moveOn('b', 1000);
             delay(300);
-            left(); 
+            moveOn('l', 1000); 
             delay(300);
         }
         
