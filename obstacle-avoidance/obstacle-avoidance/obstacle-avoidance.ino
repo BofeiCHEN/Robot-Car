@@ -12,9 +12,9 @@ int Trig = 12;//Pin to D12
 
 #define ENA 5
 #define ENB 6
-#define IN1 4
-#define IN2 2
-#define IN3 3
+#define IN1 3
+#define IN2 4
+#define IN3 2
 #define IN4 7  
 
 
@@ -30,8 +30,8 @@ void forward(){//forward function
   analogWrite(ENA, carSpeed);//Set the speed of ENA
   analogWrite(ENB, carSpeed);//Set the speed of ENB
     //The right forward
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
   //The left forward
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
@@ -43,8 +43,8 @@ void back() {//back function
   analogWrite(ENA, carSpeed);//Set the speed of ENA
   analogWrite(ENB, carSpeed);//Set the speed of ENB
   //The rihgt back
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
   //The left back
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
@@ -56,9 +56,9 @@ void left() {//left function
   analogWrite(ENB, 200);//Set the speed of ENB
    //The right forward
   digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
+  digitalWrite(IN2, LOW);
   //The left back
-  digitalWrite(IN3, LOW);
+  digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
 
   Serial.println("Left");
@@ -68,10 +68,10 @@ void right() {//right function
   analogWrite(ENA, 200);//Set the speed of ENA
   analogWrite(ENB, 200);//Set the speed of ENB
   //The rihgt back
-  digitalWrite(IN1, LOW);
+  digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
    //The left forward
-  digitalWrite(IN3, HIGH);
+  digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
 
   Serial.println("Right");
