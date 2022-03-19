@@ -30,11 +30,11 @@ void forward(){//forward function
   analogWrite(ENA, carSpeed);//Set the speed of ENA
   analogWrite(ENB, carSpeed);//Set the speed of ENB
     //The right forward
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
   //The left forward
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
 
   Serial.println("Forward");
 }
@@ -43,11 +43,11 @@ void back() {//back function
   analogWrite(ENA, carSpeed);//Set the speed of ENA
   analogWrite(ENB, carSpeed);//Set the speed of ENB
   //The rihgt back
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
   //The left back
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
   Serial.println("Back");
 }
 
@@ -58,7 +58,7 @@ void left() {//left function
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   //The left back
-  digitalWrite(IN3, HIGH);
+  digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
 
   Serial.println("Left");
@@ -68,11 +68,11 @@ void right() {//right function
   analogWrite(ENA, 200);//Set the speed of ENA
   analogWrite(ENB, 200);//Set the speed of ENB
   //The rihgt back
-  digitalWrite(IN1, HIGH);
+  digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
    //The left forward
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
 
   Serial.println("Right");
 }
@@ -121,7 +121,7 @@ void setup() {
 
 void loop() 
 {
-    
+
     SensorLeft  =  digitalRead(A5);//The sensor on the left
     SensorRight =  digitalRead(A2);//The sensor on the Right
  
