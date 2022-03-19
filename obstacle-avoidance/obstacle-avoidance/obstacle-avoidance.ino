@@ -22,6 +22,10 @@ int Trig = 12;//Pin to D12
 int Sensor1 = A5;//pin A5
 int Sensor2 = A2;//pin A2
 
+const int middleAngle = 80;
+const int rightAngle = 0;
+const int leftAngle = 170;
+
 int SensorLeft;
 int SensorRight;
 int rightDistance = 0, leftDistance = 0, middleDistance = 0;
@@ -86,7 +90,7 @@ void stop() {//stop function
 
 float GetDistance()
 {
-    float distance;
+  float distance;
     // Send a low short pulse to Trig to trigger the ranging
 	digitalWrite(Trig, LOW); //Send a low level to Trig
 	delayMicroseconds(2);
@@ -94,10 +98,10 @@ float GetDistance()
 	delayMicroseconds(10);
 	digitalWrite(Trig, LOW);
 
-    distance = pulseIn(Echo, HIGH) / 58.00;
+  distance = pulseIn(Echo, HIGH) / 58.00;
      
-    Serial.print("Distance = ");
-    Serial.println(distance);//The serial output distance is converted into cm
+  Serial.print("Distance = ");
+  Serial.println(distance);//The serial output distance is converted into cm
 
 	return distance;
 }
@@ -115,15 +119,15 @@ void setup() {
   pinMode(ENB, OUTPUT);
 
   stop();
-  ultrasonicServo.write(100);  //setservo position according to scaled value
+  ultrasonicServo.write(middleAngle);  //setservo position according to scaled value
   delay(100);
 }
 
 void loop() 
 {
 
-    SensorLeft  =  digitalRead(A5);//The sensor on the left
-    SensorRight =  digitalRead(A2);//The sensor on the Right
+    SensorRight  =  digitalRead(A5);//The sensor on the left
+    SensorLeft =  digitalRead(A2);//The sensor on the Right
  
     middleDistance = GetDistance();//getDistance();
     
@@ -131,31 +135,31 @@ void loop()
     {
         stop();
         delay(500);
-        ultrasonicServo.write(10);
+        ultrasonicServo.write(rightAngle);
         delay(500);
         rightDistance = GetDistance();//getDistance();
 
         delay(500);
-        ultrasonicServo.write(100);
+        ultrasonicServo.write(middleAngle);
         delay(500);
-        ultrasonicServo.write(180);
+        ultrasonicServo.write(leftAngle);
         delay(500);
         leftDistance = GetDistance();//getDistance();
 
         delay(500);
-        ultrasonicServo.write(100);
+        ultrasonicServo.write(middleAngle);
         delay(500);
      
         if(rightDistance > leftDistance) 
         {
-             back();
+            back();
             delay(300);
             right(); 
             delay(300);
         }
         else if(rightDistance < leftDistance) 
         {
-             back();
+            back();
             delay(300);
             left(); 
             delay(300);
