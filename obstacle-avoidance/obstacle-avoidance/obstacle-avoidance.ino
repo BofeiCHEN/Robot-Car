@@ -26,8 +26,8 @@ const int middleAngle = 80;
 const int rightAngle = 0;
 const int leftAngle = 170;
 
-int SensorLeft;
-int SensorRight;
+int LeftObstacle;
+int RightObstacle;
 int rightDistance = 0, leftDistance = 0, middleDistance = 0;
 
 void forward(){//forward function
@@ -155,8 +155,8 @@ void setup() {
 void loop() 
 {
 
-    SensorRight  =  digitalRead(A5);//The sensor on the left
-    SensorLeft =  digitalRead(A2);//The sensor on the Right
+    RightObstacle  =  !digitalRead(A5);//The sensor on the Right
+    LeftObstacle =  !digitalRead(A2);//The sensor on the Left
  
     middleDistance = GetDistance();//getDistance();
     
@@ -204,17 +204,17 @@ void loop()
         forward();
     }
 
-    if(!SensorLeft && SensorRight)
+    if(LeftObstacle && !RightObstacle)
     {
       moveOn('r', 500); 
       delay(300);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
     }
-    else if(!SensorRight && SensorLeft)
+    else if(RightObstacle && !LeftObstacle)
     {
       moveOn('l', 500);
       delay(300); 
     }
-    else if(!SensorRight && !SensorLeft)
+    else if(RightObstacle && LeftObstacle)
     {
       moveOn('b', 500);
       delay(300); 
