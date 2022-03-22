@@ -117,6 +117,42 @@ void moveOn(char dir, int duration) {
   }
 }
 
+
+/*
+use ultrasonic to scan one direction and return one average distance
+*/
+float ultrasonicScan(char dir)
+{
+  float averageDis = 0.0;
+  int steps = 4;
+  int dimision = 15;
+
+  float sumDis = 0.0;
+  switch (dir)
+  {
+  case 'r':
+    for(int i=0; i<=4; i++)
+    {
+      ultrasonicServo.write(rightAngle + i*dimision);
+      delay(500);
+      sumDis += GetDistance();
+    }
+    break;
+  case 'l':
+    for(int i=0; i<=4; i++)
+    {
+      ultrasonicServo.write(leftAngle - i*dimision);
+      delay(500);
+      sumDis += GetDistance();
+    }
+    break;
+  default:
+    break;
+  }
+  averageDis = sumDis/(steps+1);
+  return averageDis;
+}
+
 float GetDistance()
 {
   float distance;
@@ -164,16 +200,12 @@ void loop()
     {
         stop();
         delay(500);
-        ultrasonicServo.write(rightAngle);
-        delay(500);
-        rightDistance = GetDistance();//getDistance();
 
+        rightDistance = ultrasonicScan('r');
         delay(500);
         ultrasonicServo.write(middleAngle);
         delay(500);
-        ultrasonicServo.write(leftAngle);
-        delay(500);
-        leftDistance = GetDistance();//getDistance();
+        leftDistance = ultrasonicScan('l');
 
         delay(500);
         ultrasonicServo.write(middleAngle);
