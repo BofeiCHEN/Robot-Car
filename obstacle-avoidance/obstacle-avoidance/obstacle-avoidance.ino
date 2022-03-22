@@ -30,9 +30,9 @@ int LeftObstacle;
 int RightObstacle;
 int rightDistance = 0, leftDistance = 0, middleDistance = 0;
 
-void forward(){//forward function
-  analogWrite(ENA, carSpeed);//Set the speed of ENA
-  analogWrite(ENB, carSpeed);//Set the speed of ENB
+void forward(int speed = carSpeed){//forward function
+  analogWrite(ENA, speed);//Set the speed of ENA
+  analogWrite(ENB, speed);//Set the speed of ENB
     //The right forward
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
@@ -215,14 +215,14 @@ void loop()
         {
             moveOn('b', 500);
             delay(300);
-            moveOn('r', 500); 
+            moveOn('r', 300); 
             delay(300);
         }
         else if(rightDistance < leftDistance) 
         {
             moveOn('b', 500);
             delay(300);
-            moveOn('l', 500); 
+            moveOn('l', 300); 
             delay(300);
         }
         
@@ -238,17 +238,23 @@ void loop()
 
     if(LeftObstacle && !RightObstacle)
     {
-      moveOn('r', 500); 
+      //slow down first
+      forward(80);
+      moveOn('r', 200); 
       delay(300);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
     }
     else if(RightObstacle && !LeftObstacle)
     {
-      moveOn('l', 500);
+      //slow down first
+      forward(80);
+      moveOn('l', 200);
       delay(300); 
     }
     else if(RightObstacle && LeftObstacle)
     {
-      moveOn('b', 500);
+      //stop first
+      stop();
+      moveOn('b', 200);
       delay(300); 
     }
     else 
