@@ -190,7 +190,6 @@ void setup() {
 
 void loop() 
 {
-
     RightObstacle  =  !digitalRead(A5);//The sensor on the Right
     LeftObstacle =  !digitalRead(A2);//The sensor on the Left
  
