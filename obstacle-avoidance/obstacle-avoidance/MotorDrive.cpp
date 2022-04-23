@@ -24,8 +24,6 @@ void MotorDrive::foward(int speed)
   //The left forward
   digitalWrite(m_IN3, HIGH);
   digitalWrite(m_IN4, LOW);
-
-  Serial.println("Forward");
 }
 
 void MotorDrive::back(int speed)
@@ -38,5 +36,14 @@ void MotorDrive::back(int speed)
   //The left back
   digitalWrite(m_IN3, LOW);
   digitalWrite(m_IN4, HIGH);
-  Serial.println("Back");
+}
+
+void MotorDrive::left(int speed, int angle)
+{
+
+}
+
+void MotorDrive::right(int speed, int angle)
+{
+
 }

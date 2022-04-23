@@ -13,6 +13,8 @@ public:
                int pin4);
     void foward(int speed);
     void back(int speed);
+    void left(int speed, int angle);
+    void right(int speed, int angle);
 
 private:
     int m_ENA;
