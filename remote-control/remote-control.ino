@@ -4,7 +4,9 @@
  *     Email: chenbofeiheu@gmail.com
  * 
  *  **************************************/
-
+#include <IRremote.h>
+//Pin for IR
+#define IR_PIN 8
 
 // Pin for motors
 #define ENA 5
@@ -16,6 +18,8 @@
 
 
 #define carSpeed 130//Set the carSpeed to 160
+IRrecv irrecv(IR_PIN);
+decode_results results;
 
 void forward(int speed = carSpeed){//forward function
   analogWrite(ENA, speed);//Set the speed of ENA
@@ -107,10 +111,8 @@ void moveOn(char dir, int duration) {
 
 
 void setup() {
-  ultrasonicServo.attach(A0,700,2400);  // attach servo on pin 3 to servo object
   Serial.begin(9600);
-  pinMode(Echo, INPUT);
-  pinMode(Trig, OUTPUT);
+
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
@@ -120,14 +122,16 @@ void setup() {
 
   stop();
   delay(100);
+
+  irrecv.enableIRIn();  // Start the IR reeviver
 }
 
 void loop() 
 {
-    RightObstacle  =  !digitalRead(A5);//The sensor on the Right
-    LeftObstacle =  !digitalRead(A2);//The sensor on the Left
- 
-    middleDistance = GetDistance();//getDistance();
-    
+
+ if(irrecv.decode(&results)) {
+  Serial.println(results.value, HEX);
+  irrecv.resume(); // Receive the next value
+ }
     
 }
