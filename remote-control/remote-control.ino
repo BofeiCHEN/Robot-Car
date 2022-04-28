@@ -43,7 +43,8 @@
 #define carSpeed 130//Set the carSpeed to 160
 IRrecv irrecv(IR_PIN);
 decode_results results;
-
+unsigned long button_pressed = 0;
+unsigned long loopN = 0;
 void forward(int speed = carSpeed){//forward function
   analogWrite(ENA, speed);//Set the speed of ENA
   analogWrite(ENB, speed);//Set the speed of ENB
@@ -154,7 +155,52 @@ void loop()
 
  if(irrecv.decode(&results)) {
   Serial.println(results.value, HEX);
-  irrecv.resume(); // Receive the next value
+  switch(results.value) {
+    case 0xFF18E7: //2 foward
+      button_pressed = 0xFF18E7;
+      forward(); 
+      break;
+    case 0xFF10EF: //4 left
+      button_pressed = 0xFF10EF;
+      left();
+      break;
+    case 0xFF5AA5: //6 right
+      button_pressed = 0xFF5AA5;
+      right();
+      break;
+    case 0xFF4AB5: //8 back
+      button_pressed = 0xFF4AB5;
+      back();
+      break;
+    case 0xFFFFFFFF: // keep
+      break;
+    default:
+      button_pressed = 0;
+      stop();
+      break; 
+  }
+  
+  Serial.println(button_pressed, HEX);
+  Serial.println(loopN);
+  irrecv.resume(); // Receive the next value 
  }
-    
+
+    switch(button_pressed) {
+    case 0xFF18E7: //2 foward
+      forward(); 
+      break;
+    case 0xFF10EF: //4 left
+      left();
+      break;
+    case 0xFF5AA5: //6 right
+      right();
+      break;
+    case 0xFF4AB5: //8 back
+      back();
+      break;
+    default:
+      stop();
+      break; 
+  }
+
 }
